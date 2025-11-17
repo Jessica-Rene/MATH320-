@@ -1,5 +1,5 @@
 # MATH320-
 
-Names: Seth Hillis, German Guiterrez Erives, Andi Mellyn, Jessica Reyes
+Names: Seth Hillis, German Guiterrez Erives, Jessica Reyes
 
 Final Project
