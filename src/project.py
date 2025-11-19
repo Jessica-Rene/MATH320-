@@ -1,5 +1,6 @@
 """
-MATH 320 Final Project notebook coverted into pyhton script with multi processing to allow us to run faster and compare interation effects on the models.
+MATH 320 Final Project notebook coverted into pyhton script with multi processing 
+to allow us to run faster and compare interation effects on the models.
 """
 
 import os
@@ -274,14 +275,14 @@ def fit_newton(A: np.ndarray,
 def train_gd(A: np.ndarray,
              b: np.ndarray,
              lam: float = 0.0):
-    w, b0, loss_hist, acc_hist = fit_batch_gd(A, b, lr=0.1, n_iters=40, lam=lam)
+    w, b0, loss_hist, acc_hist = fit_batch_gd(A, b, lr=2, n_iters=40, lam=lam) #Higher learning rate faster convergance, more iterations for accuracy
     return ("gd", w, b0, loss_hist, acc_hist)
 
 
 def train_sgd(A: np.ndarray,
               b: np.ndarray,
               lam: float = 0.0):
-    w, b0, loss_hist, acc_hist = fit_minibatch_sgd(
+    w, b0, loss_hist, acc_hist = fit_minibatch_sgd( # Larger batch size for smoother upates nut slower run time. More epochs for longer run time, accuracy bounces after a few epochs
         A, b, lr=0.05, n_epochs=10, batch_size=512, lam=lam, seed=0
     )
     return ("sgd", w, b0, loss_hist, acc_hist)
@@ -290,7 +291,7 @@ def train_sgd(A: np.ndarray,
 def train_newton(A: np.ndarray,
                  b: np.ndarray,
                  lam: float = 0.0):
-    w, b0, loss_hist, acc_hist = fit_newton(A, b, n_iters=8, lam=lam)
+    w, b0, loss_hist, acc_hist = fit_newton(A, b, n_iters=10, lam=lam) # n_iters increased for longer run time, accuracy not impacted much after a few iterations
     return ("newton", w, b0, loss_hist, acc_hist)
 
 
@@ -328,9 +329,8 @@ def make_plots(loss_gd, loss_sgd, loss_new,
     plt.xlabel("Iteration / Epoch")
     plt.ylabel("Loss")
     plt.legend()
-    plt.savefig(os.path.join(img_dir, "loss_comparison.png"),
+    plt.savefig(os.path.join(img_dir, "loss_comparison2.png"),
                 dpi=300, bbox_inches="tight")
-    plt.show()
 
     # Accuracy plot
     plt.figure()
@@ -341,7 +341,7 @@ def make_plots(loss_gd, loss_sgd, loss_new,
     plt.xlabel("Iteration / Epoch")
     plt.ylabel("Accuracy")
     plt.legend()
-    plt.savefig(os.path.join(img_dir, "accuracy_comparison.png"),
+    plt.savefig(os.path.join(img_dir, "accuracy_comparison2.png"),
                 dpi=300, bbox_inches="tight")
     plt.show()
 
